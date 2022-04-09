@@ -25,9 +25,7 @@
               var posts = data.tree.length;
               var li = "";
               data.tree.map((el) => {
-                li += `<li><a href='/logs/${el.path}'>${new Date(
-                  el.path.split(".")[0]
-                ).toDateString()??el.path}</a></li>`;
+                li += `<li><a href='/logs/${el.path}'>${el.path.split(".")[0]}</a></li>`;
               });
               blogContent.innerHTML = li;
             });
