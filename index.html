@@ -14,19 +14,31 @@
     onload = function () {
       var blogContent = document.getElementById("blog-list");
       blogContent.innerHTML = "";
-      fetch(
-        "https://api.github.com/repos/abhi12123/logs/git/trees/dd47b3b58119388fc205573f6d98d79704432036"
-      )
+      fetch("https://api.github.com/repos/abhi12123/logs/git/trees/master")
         .then((response) => response.json())
         .then((data) => {
-            var posts = data.tree.length;
-            var li = ''
-          data.tree.map((el) => {
-            console.log(el);
-            li+=`<li><a href='/logs/${el.path}'>${new Date(el.path.split('.')[0]).toDateString()}</a></li>`
-            console.log(new Date(el.path.split('.')[0]).toDateString())
-          });
-          blogContent.innerHTML = li
+          console.log(data);
+          let x = data.tree.find((n) => n.path == "logs");
+          fetch(
+            "https://api.github.com/repos/abhi12123/logs/git/trees/d2b1ddea6ca734fe3b70ccd34530e031c80054a5"
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+              var posts = data.tree.length;
+              var li = "";
+              data.tree.map((el) => {
+                console.log(el);
+                li += `<li><a href='/logs/${el.path}'>${new Date(
+                  Number(el.path.split(".")[0])
+                ).toDateString()}</a></li>`;
+                console.log(
+                  el.path.split(".")[0],
+                  new Date(Number(el.path.split(".")[0])).toDateString()
+                );
+              });
+              blogContent.innerHTML = li;
+            });
         });
     };
   </script>
