@@ -8,13 +8,26 @@
   </head>
   <body>
     <h1>Logs</h1>
-    <div id="blogs"></div>
-    <iframe id="iframe" src="/logs/file1.txt" style="width: 95%"></iframe>
-    <!-- <a href='./logs/test.txt'>test</a> -->
-    <br />
-    <button onclick="ImageExist('/logs/file1.txt')">Next</button>
+    <ul id="blog-list"></ul>
   </body>
   <script>
-    
+    onload = function () {
+      var blogContent = document.getElementById("blog-list");
+      blogContent.innerHTML = "";
+      fetch(
+        "https://api.github.com/repos/abhi12123/logs/git/trees/dd47b3b58119388fc205573f6d98d79704432036"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+            var posts = data.tree.length;
+            var li = ''
+          data.tree.map((el) => {
+            console.log(el);
+            li+=`<li><a href='/logs/${el.path}'>${new Date(el.path.split('.')[0]).toDateString()}</a></li>`
+            console.log(new Date(el.path.split('.')[0]).toDateString())
+          });
+          blogContent.innerHTML = li
+        });
+    };
   </script>
 </html>
