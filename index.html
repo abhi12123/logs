@@ -100,7 +100,7 @@
         .then(data => {
           let innerText = '';
           data.tree.map((file)=>{
-            if(file.path!='index.html'){
+            if(file.path!='index.html' && file.path!='CNAME'){
               innerText = innerText + `<a href="./${file.path}" class="icon icon icon-txt icon-text" title="${file.path}"><span class="name">${file.path}</span></a>`
             }
           })
