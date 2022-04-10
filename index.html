@@ -8,7 +8,6 @@
     <style>
     body {
       font-family: monospace;
-      /* font-size: 1rem; */
     }
     a {
       text-decoration: none;
@@ -22,11 +21,10 @@
       flex-direction: column;
     }
 
-    /*mobile*/
-    @media (max-width: 768px) {
-      #search {
-        width: 100%;
-      }
+    input{
+      all: unset;
+      border-bottom: 1px grey solid;
+      margin-bottom: 20px;
     }
     </style>
 </head>
@@ -102,7 +100,9 @@
         .then(data => {
           let innerText = '';
           data.tree.map((file)=>{
-            innerText = innerText + `<a href="./${file.path}" class="icon icon icon-txt icon-text" title="${file.path}"><span class="name">${file.path}</span></a>`
+            if(file.path!='index.html'){
+              innerText = innerText + `<a href="./${file.path}" class="icon icon icon-txt icon-text" title="${file.path}"><span class="name">${file.path}</span></a>`
+            }
           })
           document.getElementById('files').innerHTML = innerText
         });
